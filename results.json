@@ -1,0 +1,271 @@
+{
+  "train_player_seasons": 4484,
+  "pool_player_seasons": 6948,
+  "seasons": [
+    2010,
+    2026
+  ],
+  "features": 22,
+  "pca_components": 10,
+  "pca_variance": 0.910535487868572,
+  "k": 11,
+  "ward_agreement_ari": 0.40284713286370427,
+  "similarity_validation": {
+    "pairs": 5311,
+    "median_percentile": 0.0018713113574204694,
+    "share_in_top_1pct": 0.7379024665787988,
+    "share_in_top_5pct": 0.9098098286575033
+  },
+  "share_change": {
+    "Floor General": [
+      0.17557987660859245,
+      0.07741458929512278
+    ],
+    "Hub Big": [
+      0.02140021831049474,
+      0.06479367473509853
+    ],
+    "Midrange Scorer": [
+      0.15108721010426795,
+      0.004142690372635515
+    ],
+    "Post Scoring Big": [
+      0.11121915001949809,
+      0.009302974265731376
+    ],
+    "Primary Creator": [
+      0.07857985787680272,
+      0.14475138692314846
+    ],
+    "Rim Running Big": [
+      0.06053944148614614,
+      0.034956317516727446
+    ],
+    "Secondary Scorer": [
+      0.15930024845164728,
+      0.14848428498128385
+    ],
+    "Slashing Forward": [
+      0.059940024215095436,
+      0.0734785168961848
+    ],
+    "Spot Up Shooter": [
+      0.06812241054293242,
+      0.14466701791722195
+    ],
+    "Stretch Forward": [
+      0.05773818747796886,
+      0.16770147835160182
+    ],
+    "Two Way Wing": [
+      0.056493374906553914,
+      0.13030706874524348
+    ]
+  },
+  "team": {
+    "team_seasons": 240,
+    "seasons": [
+      2015,
+      2022
+    ],
+    "r2_talent_only": 0.6209075442444295,
+    "r2_archetypes_only": 0.1430401223290616,
+    "r2_talent_plus_archetypes": 0.620043395809752,
+    "ols_talent_coef": 3.844020472643976,
+    "ols_baseline": "Spot Up Shooter"
+  },
+  "examples": {
+    "Nikola Jokić 2024": [
+      [
+        "Jalen Johnson",
+        2026,
+        "Hub Big",
+        0.935
+      ],
+      [
+        "Alperen Şengün",
+        2025,
+        "Hub Big",
+        0.926
+      ],
+      [
+        "Alperen Şengün",
+        2026,
+        "Hub Big",
+        0.91
+      ],
+      [
+        "Alperen Şengün",
+        2024,
+        "Hub Big",
+        0.907
+      ],
+      [
+        "Pascal Siakam",
+        2022,
+        "Hub Big",
+        0.886
+      ]
+    ],
+    "Stephen Curry 2016": [
+      [
+        "Manu Ginóbili",
+        2011,
+        "Primary Creator",
+        0.978
+      ],
+      [
+        "Donovan Mitchell",
+        2024,
+        "Primary Creator",
+        0.975
+      ],
+      [
+        "Victor Oladipo",
+        2021,
+        "Primary Creator",
+        0.969
+      ],
+      [
+        "Jalen Green",
+        2026,
+        "Primary Creator",
+        0.949
+      ],
+      [
+        "Anthony Edwards",
+        2023,
+        "Primary Creator",
+        0.942
+      ]
+    ],
+    "Giannis Antetokounmpo 2020": [
+      [
+        "DeMarcus Cousins",
+        2017,
+        "Hub Big",
+        0.944
+      ],
+      [
+        "Joel Embiid",
+        2019,
+        "Hub Big",
+        0.941
+      ],
+      [
+        "DeMarcus Cousins",
+        2016,
+        "Hub Big",
+        0.929
+      ],
+      [
+        "Karl-Anthony Towns",
+        2022,
+        "Hub Big",
+        0.914
+      ],
+      [
+        "DeMarcus Cousins",
+        2018,
+        "Hub Big",
+        0.912
+      ]
+    ],
+    "Draymond Green 2016": [
+      [
+        "Lamar Odom",
+        2010,
+        "Stretch Forward",
+        0.811
+      ],
+      [
+        "Jusuf Nurkić",
+        2024,
+        "Slashing Forward",
+        0.796
+      ],
+      [
+        "Jusuf Nurkić",
+        2021,
+        "Hub Big",
+        0.769
+      ],
+      [
+        "Domantas Sabonis",
+        2021,
+        "Hub Big",
+        0.752
+      ],
+      [
+        "James Johnson",
+        2018,
+        "Stretch Forward",
+        0.739
+      ]
+    ],
+    "Rudy Gobert 2022": [
+      [
+        "DeAndre Jordan",
+        2016,
+        "Rim Running Big",
+        0.991
+      ],
+      [
+        "Clint Capela",
+        2018,
+        "Rim Running Big",
+        0.988
+      ],
+      [
+        "DeAndre Jordan",
+        2017,
+        "Rim Running Big",
+        0.985
+      ],
+      [
+        "DeAndre Jordan",
+        2019,
+        "Rim Running Big",
+        0.972
+      ],
+      [
+        "Clint Capela",
+        2021,
+        "Rim Running Big",
+        0.972
+      ]
+    ],
+    "Victor Wembanyama 2026": [
+      [
+        "Anthony Davis",
+        2020,
+        "Hub Big",
+        0.93
+      ],
+      [
+        "Kristaps Porziņģis",
+        2022,
+        "Hub Big",
+        0.921
+      ],
+      [
+        "Kristaps Porziņģis",
+        2024,
+        "Hub Big",
+        0.916
+      ],
+      [
+        "Anthony Davis",
+        2019,
+        "Hub Big",
+        0.913
+      ],
+      [
+        "Joel Embiid",
+        2019,
+        "Hub Big",
+        0.899
+      ]
+    ]
+  }
+}

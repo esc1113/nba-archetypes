@@ -1,0 +1,244 @@
+<title>NBA Player Archetypes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: scouting sheet. Lookup panel on top (player card + comps), archetype guide grid below. */
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --ink: #15202b;
+  --muted: #5b6875;
+  --line: #d9dee4;
+  --accent: #c2410c;
+  --g-guard: #c2410c;
+  --g-wing: #1d5fa8;
+  --g-fwd: #2f7d4f;
+  --g-big: #6d3fb0;
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151b; --surface: #17202a; --ink: #e6ebf0; --muted: #93a1ae; --line: #2a3644;
+  --accent: #f08a4b; --g-guard: #f08a4b; --g-wing: #6aa6ea; --g-fwd: #6cc493; --g-big: #b192ec;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151b; --surface: #17202a; --ink: #e6ebf0; --muted: #93a1ae; --line: #2a3644;
+  --accent: #f08a4b; --g-guard: #f08a4b; --g-wing: #6aa6ea; --g-fwd: #6cc493; --g-big: #b192ec;
+  color-scheme: dark; }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 56px; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: 0.01em; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1; text-transform: uppercase; }
+h2 { font-size: 1.6rem; text-transform: uppercase; }
+.lede { color: var(--muted); max-width: 64ch; margin: 8px 0 0; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+.lookup { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 20px; align-items: start; }
+@media (max-width: 760px) { .lookup { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+
+.search { display: grid; gap: 6px; }
+label { font-size: 13px; font-weight: 600; }
+input[type=text] { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--ink); width: 100%; box-sizing: border-box; }
+input:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.seasons { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--mono); font-size: 13px; padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.chip:hover { border-color: var(--ink); }
+
+.card-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.pname { font-family: var(--display); font-size: 2rem; line-height: 1.05; font-weight: 700; }
+.meta { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 999px; border: 1px solid currentColor; }
+.badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 14px; margin: 0; }
+.stats div { display: grid; gap: 2px; border-top: 1px solid var(--line); padding-top: 8px; }
+.stats dt { font-size: 12px; color: var(--muted); }
+.stats dd { margin: 0; font-family: var(--mono); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.blurb { color: var(--muted); margin: 0; font-size: 14px; }
+
+.comps-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.toggle { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+ol.comps { list-style: none; margin: 0; padding: 0; display: grid; }
+ol.comps li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); }
+ol.comps li:first-child { border-top: 0; }
+.rank { font-family: var(--mono); color: var(--muted); font-size: 13px; }
+.cname { font-weight: 600; background: none; border: 0; padding: 0; color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; text-align: left; }
+.cname:hover { text-decoration: underline; }
+.csub { font-size: 12.5px; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.sim { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 14px; display: grid; justify-items: end; gap: 3px; }
+.bar { width: 72px; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--accent); }
+
+.guide-head { display: flex; justify-content: space-between; gap: 16px; align-items: end; flex-wrap: wrap; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.arch { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: grid; gap: 8px; align-content: start; }
+.arch h3 { font-size: 1.25rem; display: flex; gap: 8px; align-items: center; }
+.arch p { margin: 0; font-size: 13.5px; color: var(--muted); }
+.arch .ex { font-size: 13px; color: var(--ink); }
+.spark { width: 100%; height: 56px; display: block; }
+.spark text { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
+.share { font-family: var(--mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.share b { color: var(--ink); font-weight: 500; }
+footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; max-width: 80ch; }
+footer a { color: var(--ink); }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">2009-10 to 2025-26 regular seasons · 6,948 player seasons</div>
+    <h1>NBA Player Archetypes</h1>
+    <p class="lede">Every player season since 2010 sorted into one of 11 roles by how the player plays, not how well. Pick a player to see their role and the most statistically similar seasons in the league.</p>
+  </header>
+
+  <section class="lookup" aria-label="Player lookup">
+    <div class="panel">
+      <div class="search">
+        <label for="player">Player</label>
+        <input type="text" id="player" list="players" autocomplete="off" placeholder="Start typing a name">
+        <datalist id="players"></datalist>
+      </div>
+      <div class="seasons" id="seasons" role="group" aria-label="Season"></div>
+      <div id="card"></div>
+    </div>
+    <div class="panel">
+      <div class="comps-head">
+        <h2>Closest comps</h2>
+        <label class="toggle"><input type="checkbox" id="others" checked> Other players only</label>
+      </div>
+      <ol class="comps" id="comps"></ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="guide-head">
+      <div>
+        <h2>The 11 archetypes</h2>
+        <p class="lede">Line shows each role's share of all league minutes, 2010 to 2026.</p>
+      </div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="grid" id="guide" style="margin-top:14px"></div>
+  </section>
+
+  <footer>
+    Method: 22 per 100 possession, shot location, and position features, standardized and reduced with PCA (10 components, 91% of variance), clustered with KMeans on seasons with at least 1,000 minutes. Seasons with at least 250 minutes are assigned to the nearest archetype. Similarity is cosine similarity in PCA space. Data from Basketball Reference via the public sumitrodatta/bball-reference-datasets repository. Season labels use the year the season ends.
+  </footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+const GROUP = {
+  "Primary Creator": "guard", "Floor General": "guard", "Secondary Scorer": "guard",
+  "Spot Up Shooter": "wing", "Two Way Wing": "wing", "Midrange Scorer": "wing",
+  "Stretch Forward": "fwd", "Slashing Forward": "fwd",
+  "Hub Big": "big", "Post Scoring Big": "big", "Rim Running Big": "big"
+};
+const GROUP_NAME = { guard: "Guards", wing: "Wings", fwd: "Forwards", big: "Bigs" };
+const color = a => `var(--g-${GROUP[a]})`;
+const A = DATA.archetypes;
+const rows = DATA.rows.map((r, i) => ({ i, name: r[0], season: r[1], team: r[2], mp: r[3], arch: A[r[4]].name,
+  pts: r[5], ast: r[6], fg3a: r[7], reb: r[8], rim: r[9], three: r[10], v: r[11] }));
+const byName = new Map();
+rows.forEach(r => { if (!byName.has(r.name)) byName.set(r.name, []); byName.get(r.name).push(r); });
+const seasonLabel = s => `${s - 1}-${String(s).slice(2)}`;
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+const dl = document.getElementById("players");
+dl.innerHTML = [...byName.keys()].sort((a, b) => a.localeCompare(b)).map(n => `<option value="${esc(n)}">`).join("");
+
+let current = null;
+const input = document.getElementById("player");
+
+function selectPlayer(name, season) {
+  const list = byName.get(name);
+  if (!list) return;
+  list.sort((a, b) => a.season - b.season);
+  const pick = list.find(r => r.season === season) || list.reduce((a, b) => (b.mp > a.mp ? b : a));
+  input.value = name;
+  document.getElementById("seasons").innerHTML = list.map(r =>
+    `<button class="chip" type="button" data-s="${r.season}" aria-pressed="${r === pick}">${seasonLabel(r.season)}</button>`).join("");
+  current = pick;
+  render();
+}
+
+function render() {
+  const r = current, a = A.find(x => x.name === r.arch);
+  document.getElementById("card").innerHTML = `
+    <div class="card-head">
+      <div><div class="pname">${esc(r.name)}</div><div class="meta">${seasonLabel(r.season)} · ${r.team} · ${r.mp.toLocaleString()} min</div></div>
+      <span class="badge" style="color:${color(r.arch)}">${r.arch}</span>
+    </div>
+    <p class="blurb">${a.blurb}</p>
+    <dl class="stats">
+      <div><dt>Points / 100</dt><dd>${r.pts.toFixed(1)}</dd></div>
+      <div><dt>Assists / 100</dt><dd>${r.ast.toFixed(1)}</dd></div>
+      <div><dt>Rebounds / 100</dt><dd>${r.reb.toFixed(1)}</dd></div>
+      <div><dt>3PA / 100</dt><dd>${r.fg3a.toFixed(1)}</dd></div>
+      <div><dt>Shots at rim</dt><dd>${r.rim}%</dd></div>
+      <div><dt>Shots from 3</dt><dd>${r.three}%</dd></div>
+    </dl>`;
+  const others = document.getElementById("others").checked;
+  const scored = [];
+  for (const o of rows) {
+    if (o === r || (others && o.name === r.name)) continue;
+    let s = 0; for (let k = 0; k < r.v.length; k++) s += r.v[k] * o.v[k];
+    scored.push([s, o]);
+  }
+  scored.sort((x, y) => y[0] - x[0]);
+  document.getElementById("comps").innerHTML = scored.slice(0, 10).map(([s, o], k) => `
+    <li>
+      <span class="rank">${k + 1}</span>
+      <div style="min-width:0">
+        <button class="cname" type="button" data-n="${esc(o.name)}" data-s="${o.season}">${esc(o.name)}</button>
+        <div class="csub"><span>${seasonLabel(o.season)} · ${o.team}</span><span><i class="dot" style="background:${color(o.arch)}"></i> ${o.arch}</span></div>
+      </div>
+      <div class="sim">${(s * 100).toFixed(1)}<span class="bar"><span style="width:${Math.max(0, s) * 100}%"></span></span></div>
+    </li>`).join("");
+}
+
+document.getElementById("seasons").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  selectPlayer(current.name, +b.dataset.s);
+});
+document.getElementById("comps").addEventListener("click", e => {
+  const b = e.target.closest(".cname"); if (!b) return;
+  selectPlayer(b.dataset.n, +b.dataset.s);
+});
+document.getElementById("others").addEventListener("change", render);
+input.addEventListener("change", () => { if (byName.has(input.value)) selectPlayer(input.value); });
+input.addEventListener("input", () => { if (byName.has(input.value)) selectPlayer(input.value); });
+
+function spark(share) {
+  const W = 240, H = 56, max = 22, n = share.length;
+  const x = i => 4 + (i / (n - 1)) * (W - 8), y = v => H - 14 - (v / max) * (H - 20);
+  const pts = share.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  return { pts, area: `4,${H - 14} ${pts} ${x(n - 1).toFixed(1)},${H - 14}`, endX: x(n - 1), endY: y(share[n - 1]), W, H };
+}
+const ORDER = ["guard", "wing", "fwd", "big"];
+document.getElementById("guide").innerHTML = [...A].sort((x, y) => ORDER.indexOf(GROUP[x.name]) - ORDER.indexOf(GROUP[y.name])).map(a => {
+  const s = spark(a.share), c = color(a.name);
+  return `<article class="arch">
+    <h3><i class="dot" style="background:${c}"></i>${a.name}</h3>
+    <p>${a.blurb}</p>
+    <svg class="spark" viewBox="0 0 ${s.W} ${s.H}" preserveAspectRatio="none" role="img" aria-label="${a.name} share of minutes over time">
+      <line x1="4" x2="${s.W - 4}" y1="${s.H - 14}" y2="${s.H - 14}" stroke="var(--line)" />
+      <polygon points="${s.area}" fill="${c}" fill-opacity="0.12" />
+      <polyline points="${s.pts}" fill="none" stroke="${c}" stroke-width="2" vector-effect="non-scaling-stroke" />
+      <circle cx="${s.endX}" cy="${s.endY}" r="2.5" fill="${c}" />
+      <text x="4" y="${s.H - 2}">2010</text><text x="${s.W - 4}" y="${s.H - 2}" text-anchor="end">2026</text>
+    </svg>
+    <div class="share"><b>${a.share[0].toFixed(1)}%</b> of minutes in 2010, <b>${a.share[a.share.length - 1].toFixed(1)}%</b> in 2026</div>
+    <div class="ex">${a.examples.map(esc).join(", ")}</div>
+  </article>`;
+}).join("");
+document.getElementById("legend").innerHTML = Object.entries(GROUP_NAME).map(([g, n]) =>
+  `<span><i class="dot" style="background:var(--g-${g})"></i>${n}</span>`).join("");
+
+selectPlayer("Nikola Jokić", 2024);
+</script>
